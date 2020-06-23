@@ -1,0 +1,25 @@
+# Gradle metadata
+.gradle/
+build
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+wrapper/gradle-wrapper.jar
+
+# Gradle build output
+build/
+
+#Intellj Idea
+.idea
+bin
+.DS_Store
+target
+
+# VSCode
+.vscode
+.settings
+.classpath
+.project
+
+#Project
+logs
+.log

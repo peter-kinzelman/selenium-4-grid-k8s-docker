@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+version '1.0'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+description = "Selenium Automation Architecture"
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    def selenium_version = '4.0.0-alpha-6'
+    def webDriver_manager_version = '4.0.0'
+    def junit_version = '5.6.2'
+
+    implementation(
+            "org.seleniumhq.selenium:selenium-java:$selenium_version",
+            "org.seleniumhq.selenium:selenium-support:$selenium_version",
+            "org.seleniumhq.selenium:selenium-support:$selenium_version",
+            "org.seleniumhq.selenium:selenium-remote-driver:$selenium_version",
+            "io.github.bonigarcia:webdrivermanager:$webDriver_manager_version",
+            "org.apache.logging.log4j:log4j-core:2.13.3",
+            "org.apache.logging.log4j:log4j-api:2.13.3"
+    )
+
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    )
+
+    testRuntimeOnly(
+            "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    )
+}
+
+test {
+    useJUnitPlatform()
+    testLogging.events("passed", "skipped", "failed")
+}
