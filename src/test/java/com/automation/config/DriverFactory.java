@@ -85,7 +85,7 @@ public class DriverFactory {
             caps.setBrowserName(selectedDriverType.toString());
 
             try {
-                driver = new RemoteWebDriver(new URL("http://192.168.99.100:30001/wd/hub"), caps);
+                driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), caps);
             } catch (MalformedURLException e) {
                 log.error(String.format("An error occurred while the driver instantiates: %s", e.getMessage()));
             }
