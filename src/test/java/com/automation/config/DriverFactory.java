@@ -66,7 +66,7 @@ public class DriverFactory {
     private void instantiateWebDriver(DriverType driverType) {
         DesiredCapabilities caps = new DesiredCapabilities();
 
-        log.info("Local Operating System      : " + System.getProperty("os.name").toUpperCase().toUpperCase());
+        log.info("Local Operating System      : " + System.getProperty("os.name").toUpperCase());
         log.info("Local Version               : " + System.getProperty("os.arch"));
         log.info("Local Architecture          : " + System.getProperty("os.version"));
         log.info("Browser                     : " + selectedDriverType.toString().toUpperCase());
