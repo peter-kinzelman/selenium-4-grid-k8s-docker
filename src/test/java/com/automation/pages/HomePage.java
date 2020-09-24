@@ -58,6 +58,4 @@ public class HomePage extends LoadableComponent<HomePage> {
         searchButton.click();
         return this;
     }
-
-
 }
