@@ -10,9 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class HomePage {
 
-    protected RemoteWebDriver driver;
     private static final Logger log = LogManager.getLogger(HomePage.class.getName());
-    private static final String BASE_URL = "https://wikipedia.org";
 
     @FindBy(id = "searchInput")
     private WebElement searchInput;
@@ -24,7 +22,6 @@ public class HomePage {
     private WebElement selectLanguage;
 
     private HomePage(RemoteWebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 

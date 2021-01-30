@@ -7,13 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SeleniumPage {
 
-    private RemoteWebDriver driver;
-
     @FindBy(xpath = "//div[@class='hatnote navigation-not-searchable']")
     private WebElement definition;
 
     private SeleniumPage(RemoteWebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
