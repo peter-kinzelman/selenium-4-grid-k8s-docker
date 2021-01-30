@@ -5,7 +5,8 @@ import com.burakkaygusuz.config.DriverType;
 import com.burakkaygusuz.pages.HomePage;
 import com.burakkaygusuz.pages.SeleniumPage;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -16,16 +17,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Selenium Page Tests")
 public class SeleniumPageTests extends BaseTest {
 
-    @Test
+    @ParameterizedTest(name = "#{index} - Run with => {0}")
+    @EnumSource(value = DriverType.class, names = {"CHROME", "FIREFOX"})
     @DisplayName("Get the wiki page of Selenium")
-    public void getSeleniumWikiPage() {
+    public void getSeleniumWikiPage(DriverType driverType) {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        driver = getWebDriver(DriverType.CHROME, capabilities);
+        driver = getWebDriver(driverType, capabilities);
         wait = getDriverWait(driver);
 
         final HomePage homePage = getHomePage(driver);
         final SeleniumPage wikiPage = getSeleniumPage(driver);
+
+        driver.navigate().to("https://wikipedia.org");
 
         homePage.selectLanguage("English")
                 .clearAndType("Selenium (software)")
