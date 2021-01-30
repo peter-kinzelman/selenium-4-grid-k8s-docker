@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
@@ -30,10 +31,12 @@ public class DriverFactory {
                         driver = DriverType.FIREFOX.getDriverWithOptions(new URL(HUB_URL), capabilities);
                         break;
                     default:
-                        throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: %s", driverType.toString()));
+                        throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", driverType.toString()));
                 }
             } catch (MalformedURLException e) {
-                log.error(String.format("Malformed URL has occurred:" + "\n" + "%s", ExceptionUtils.getStackTrace(e)));
+                log.error(String.format("Malformed URL has occurred: \n %s", ExceptionUtils.getStackTrace(e)));
+            } catch (UnreachableBrowserException e) {
+                log.error(String.format("An error occurred that communicating with the preferred browser or the selenium server: \n %s", ExceptionUtils.getStackTrace(e)));
             }
         }
 
