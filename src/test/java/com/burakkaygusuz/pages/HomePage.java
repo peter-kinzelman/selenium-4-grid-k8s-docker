@@ -1,4 +1,4 @@
-package com.automation.pages;
+package com.burakkaygusuz.pages;
 
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
@@ -8,28 +8,27 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.automation.BaseTest.getStoredDriver;
-
 public class HomePage extends LoadableComponent<HomePage> {
 
-    private static final RemoteWebDriver driver = getStoredDriver();
+    protected RemoteWebDriver driver;
     private static final String BASE_URL = "https://wikipedia.org";
 
     @FindBy(id = "searchInput")
     private WebElement searchInput;
 
-    @FindBy(xpath= "//button[@class='pure-button pure-button-primary-progressive']")
+    @FindBy(xpath = "//button[@class='pure-button pure-button-primary-progressive']")
     private WebElement searchButton;
 
     @FindBy(id = "searchLanguage")
     private WebElement selectLanguage;
 
-    private HomePage() {
+    private HomePage(RemoteWebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public static HomePage getHomePage() {
-        return new HomePage();
+    public static HomePage getHomePage(RemoteWebDriver driver) {
+        return new HomePage(driver);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class HomePage extends LoadableComponent<HomePage> {
         return this;
     }
 
-    public HomePage submitButton(){
+    public HomePage submitButton() {
         searchButton.click();
         return this;
     }
