@@ -1,3 +1,6 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
     id 'java'
 }
@@ -45,10 +48,32 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    testLogging.events("passed", "skipped", "failed")
+
     systemProperties["junit.jupiter.execution.parallel.enabled"] = true
     systemProperties["junit.jupiter.execution.parallel.mode.default"] = "concurrent"
     systemProperties["junit.jupiter.execution.parallel.mode.classes.default"] = "same_thread"
 
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+
+    afterSuite { desc, result ->
+        if (!desc.parent)
+            println("${result.resultType} " +
+                    "(${result.testCount} tests, " +
+                    "${result.successfulTestCount} successes, " +
+                    "${result.failedTestCount} failures, " +
+                    "${result.skippedTestCount} skipped)")
+    }
+}
+
+tasks.withType(Test) {
+    testLogging.events(
+            TestLogEvent.FAILED,
+            TestLogEvent.PASSED,
+            TestLogEvent.SKIPPED,
+            TestLogEvent.STANDARD_ERROR,
+            TestLogEvent.STANDARD_OUT)
+    testLogging.exceptionFormat TestExceptionFormat.FULL
+    testLogging.showCauses true
+    testLogging.showExceptions true
+    testLogging.showStackTraces true
 }
