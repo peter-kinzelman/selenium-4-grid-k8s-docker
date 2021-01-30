@@ -1,14 +1,11 @@
 package com.burakkaygusuz.pages;
 
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
 
-public class HomePage extends LoadableComponent<HomePage> {
 
     protected RemoteWebDriver driver;
     private static final String BASE_URL = "https://wikipedia.org";
@@ -29,16 +26,6 @@ public class HomePage extends LoadableComponent<HomePage> {
 
     public static HomePage getHomePage(RemoteWebDriver driver) {
         return new HomePage(driver);
-    }
-
-    @Override
-    protected void load() {
-        driver.get(BASE_URL);
-    }
-
-    @Override
-    protected void isLoaded() throws Error {
-        Assertions.assertTrue(driver.getCurrentUrl().contains(BASE_URL), "Wiki page is not loaded");
     }
 
     public HomePage selectLanguage(String language) {
