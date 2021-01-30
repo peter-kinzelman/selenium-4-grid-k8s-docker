@@ -5,6 +5,8 @@ import com.burakkaygusuz.config.DriverType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Execution(ExecutionMode.CONCURRENT)
 public class BaseTest {
 
     public static final List<DriverFactory> webDriverThreadPool = Collections.synchronizedList(new ArrayList<>());
