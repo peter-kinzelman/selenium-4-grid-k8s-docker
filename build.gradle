@@ -20,7 +20,7 @@ repositories {
 dependencies {
 
     def selenium_version = '4.0.0-alpha-7'
-    def junit_jupiter_version = '5.7.0'
+    def junit_jupiter_version = '5.7.1'
     def log4j_core_version = '2.13.3'
     def apache_commons_version = '3.11'
     def fasterxml_jackson_version = '2.12.0'
