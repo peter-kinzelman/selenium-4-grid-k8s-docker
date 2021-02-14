@@ -19,7 +19,6 @@ public class SeleniumPageTests extends BaseTest {
 
     @ParameterizedTest(name = "#{index} - Run with => {0}")
     @EnumSource(value = DriverType.class, names = {"CHROME", "FIREFOX"})
-    @DisplayName("Get the wiki page of Selenium")
     public void getSeleniumWikiPage(DriverType driverType) {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
