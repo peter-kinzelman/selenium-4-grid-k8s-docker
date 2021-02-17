@@ -60,6 +60,22 @@ public enum DriverType implements DriverOptions {
 
             capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
 
+
+    EDGE {
+        @Override
+        public RemoteWebDriver getDriverWithOptions(URL url, DesiredCapabilities capabilities) {
+            System.setProperty(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+            Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
+
+            final EdgeOptions options = new EdgeOptions();
+
+            options.setAcceptInsecureCerts(true);
+            options.addArguments("disable-gpu");
+            options.setHeadless(true);
+            options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
+            capabilities.setCapability(EdgeOptions.CAPABILITY, options);
+
             return new RemoteWebDriver(url, capabilities);
         }
     };
