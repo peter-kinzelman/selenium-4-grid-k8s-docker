@@ -3,8 +3,11 @@ package com.burakkaygusuz.config;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriverService;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -46,10 +49,12 @@ public enum DriverType implements DriverOptions {
     FIREFOX {
         @Override
         public RemoteWebDriver getDriverWithOptions(URL url, DesiredCapabilities capabilities) {
-            System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
             Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
 
             final FirefoxOptions options = new FirefoxOptions();
+            final FirefoxProfile profile = new FirefoxProfile();
+
+            profile.setPreference(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, true);
 
             options.setAcceptInsecureCerts(true);
             options.addPreference("dom.webnotifications.enabled", false);
@@ -57,9 +62,13 @@ public enum DriverType implements DriverOptions {
             options.addPreference("layers.acceleration.disabled", true);
             options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             options.setHeadless(true);
+            options.setProfile(profile);
 
             capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
 
+            return new RemoteWebDriver(url, capabilities);
+        }
+    },
 
     EDGE {
         @Override
