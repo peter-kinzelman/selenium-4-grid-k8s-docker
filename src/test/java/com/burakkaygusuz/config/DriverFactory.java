@@ -18,7 +18,7 @@ public class DriverFactory {
     private static WebDriverWait wait;
     private RemoteWebDriver driver;
 
-    private final String HUB_URL = "http://192.168.64.4:31149";
+    private static final String HUB_URL = "http://192.168.64.4:31149";
 
     public RemoteWebDriver getWebDriver(DriverType driverType, DesiredCapabilities capabilities) {
         if (driver == null) {
