@@ -8,9 +8,12 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Scanner;
 
 public class DriverFactory {
 
@@ -18,7 +21,7 @@ public class DriverFactory {
     private static WebDriverWait wait;
     private RemoteWebDriver driver;
 
-    private static final String HUB_URL = "http://192.168.64.4:31149";
+    private static final String HUB_URL = getHubUrl();
 
     public RemoteWebDriver getWebDriver(DriverType driverType, DesiredCapabilities capabilities) {
         if (driver == null) {
@@ -57,5 +60,16 @@ public class DriverFactory {
             driver.quit();
             driver = null;
         }
+    }
+
+    private static String getHubUrl() {
+        String hubUrl = null;
+        try (InputStream inputStream = Runtime.getRuntime().exec("minikube service selenium-router-deployment --url").getInputStream();
+             Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
+            hubUrl = s.hasNext() ? s.next() : null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return hubUrl;
     }
 }
