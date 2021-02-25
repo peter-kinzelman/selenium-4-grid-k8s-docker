@@ -14,7 +14,7 @@ import static com.burakkaygusuz.pages.HomePage.getHomePage;
 import static com.burakkaygusuz.pages.SeleniumPage.getSeleniumPage;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Selenium Page Tests")
+@DisplayName("Selenium Wikipedia Page Tests")
 public class SeleniumPageTests extends BaseTest {
 
     @ParameterizedTest(name = "#{index} - Run with => {0}")
