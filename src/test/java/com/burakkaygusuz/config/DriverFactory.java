@@ -30,6 +30,8 @@ public class DriverFactory {
                     case FIREFOX:
                         driver = DriverType.FIREFOX.getDriverWithOptions(new URL(HUB_URL), capabilities);
                         break;
+                    case EDGE:
+                        driver = DriverType.EDGE.getDriverWithOptions(new URL(HUB_URL), capabilities);
                     default:
                         throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", driverType.toString()));
                 }

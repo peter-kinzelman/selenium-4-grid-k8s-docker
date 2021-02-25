@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SeleniumPageTests extends BaseTest {
 
     @ParameterizedTest(name = "#{index} - Run with => {0}")
-    @EnumSource(value = DriverType.class, names = {"CHROME", "FIREFOX"})
+    @EnumSource(value = DriverType.class, names = {"CHROME", "FIREFOX", "EDGE"})
     public void getSeleniumWikiPage(DriverType driverType) {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
