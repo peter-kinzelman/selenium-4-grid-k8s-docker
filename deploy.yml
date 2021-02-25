@@ -412,11 +412,11 @@ spec:
               mountPath: /dev/shm
           resources:
             requests:
-              memory: "1000Mi"
-              cpu: "500m"
+              memory: "1Gi"
+              cpu: "1"
             limits:
-              memory: "1000Mi"
-              cpu: "500m"
+              memory: "1Gi"
+              cpu: "1"
       volumes:
         - name: dshm
           emptyDir: { "medium": "Memory" }
@@ -479,11 +479,11 @@ spec:
               mountPath: /dev/shm
           resources:
             requests:
-              memory: "1000Mi"
-              cpu: "500m"
+              memory: "1Gi"
+              cpu: "1"
             limits:
-              memory: "1000Mi"
-              cpu: "500m"
+              memory: "1Gi"
+              cpu: "1"
       volumes:
         - name: dshm
           emptyDir: { "medium": "Memory" }
