@@ -8,7 +8,7 @@ metadata:
   name: selenium-event-bus
   labels:
     name: selenium-event-bus
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-event-bus
@@ -34,7 +34,7 @@ metadata:
   labels:
     app: selenium-event-bus
     name: selenium-event-bus
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -45,7 +45,7 @@ spec:
       labels:
         app: selenium-event-bus
         name: selenium-event-bus
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-event-bus
@@ -67,7 +67,7 @@ metadata:
   name: selenium-sessions
   labels:
     name: selenium-sessions
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-sessions
@@ -85,7 +85,7 @@ metadata:
   labels:
     app: selenium-sessions
     name: selenium-sessions
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -96,7 +96,7 @@ spec:
       labels:
         app: selenium-sessions
         name: selenium-sessions
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-sessions
@@ -121,7 +121,7 @@ metadata:
   name: selenium-session-queuer
   labels:
     name: selenium-session-queuer
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-session-queuer
@@ -138,7 +138,7 @@ metadata:
   labels:
     app: selenium-session-queuer
     name: selenium-session-queuer
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -149,7 +149,7 @@ spec:
       labels:
         app: selenium-session-queuer
         name: selenium-session-queuer
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-session-queuer
@@ -174,7 +174,7 @@ metadata:
   name: selenium-distributor
   labels:
     name: selenium-distributor
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-distributor
@@ -192,7 +192,7 @@ metadata:
   labels:
     app: selenium-distributor
     name: selenium-distributor
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -203,7 +203,7 @@ spec:
       labels:
         app: selenium-distributor
         name: selenium-distributor
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-distributor
@@ -236,7 +236,7 @@ metadata:
   name: selenium-router
   labels:
     name: selenium-router
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-router
@@ -254,7 +254,7 @@ metadata:
   labels:
     app: selenium-router
     name: selenium-router
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -265,7 +265,7 @@ spec:
       labels:
         app: selenium-router
         name: selenium-router
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-router
@@ -296,7 +296,7 @@ metadata:
   name: selenium-chrome-node
   labels:
     name: selenium-chrome-node
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-chrome-node
@@ -314,7 +314,7 @@ metadata:
   labels:
     app: selenium-chrome-node
     name: selenium-chrome-node
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -325,7 +325,7 @@ spec:
       labels:
         app: selenium-chrome-node
         name: selenium-chrome-node
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-chrome-node
@@ -363,7 +363,7 @@ metadata:
   name: selenium-edge-node
   labels:
     name: selenium-edge-node
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-edge-node
@@ -381,7 +381,7 @@ metadata:
   labels:
     app: selenium-edge-node
     name: selenium-edge-node
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -392,7 +392,7 @@ spec:
       labels:
         app: selenium-edge-node
         name: selenium-edge-node
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-edge-node
@@ -430,7 +430,7 @@ metadata:
   name: selenium-ff-node
   labels:
     name: selenium-ff-node
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   selector:
     app: selenium-ff-node
@@ -448,7 +448,7 @@ metadata:
   labels:
     app: selenium-ff-node
     name: selenium-ff-node
-    component: "selenium-grid-4"
+    component: "selenium-4-grid-k8s-docker"
 spec:
   replicas: 1
   selector:
@@ -459,7 +459,7 @@ spec:
       labels:
         app: selenium-ff-node
         name: selenium-ff-node
-        component: "selenium-grid-4"
+        component: "selenium-4-grid-k8s-docker"
     spec:
       containers:
         - name: selenium-ff-node
