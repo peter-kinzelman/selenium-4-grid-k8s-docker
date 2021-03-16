@@ -7,11 +7,13 @@ plugins {
 
 version '1.0'
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+    compileJava.options.encoding = 'UTF-8'
+}
 
 description = "Selenium 4 Grid & K8s & Docker"
-compileJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
