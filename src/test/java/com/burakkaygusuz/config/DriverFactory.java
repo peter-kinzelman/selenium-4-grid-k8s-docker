@@ -1,48 +1,50 @@
 package com.burakkaygusuz.config;
 
+import com.burakkaygusuz.enums.Browsers;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 import java.util.Scanner;
 
+import static com.burakkaygusuz.config.DriverType.*;
+
 public class DriverFactory {
 
-    private static final Logger log = LogManager.getLogger(DriverFactory.class.getName());
-    private static WebDriverWait wait;
-    private RemoteWebDriver driver;
+    private static final Logger logger = LogManager.getLogger(DriverFactory.class.getName());
+    protected static WebDriverWait wait;
+    protected RemoteWebDriver driver;
 
     private static final String HUB_URL = getHubUrl();
 
-    public RemoteWebDriver getWebDriver(DriverType driverType, DesiredCapabilities capabilities) {
+    public RemoteWebDriver getWebDriver(Browsers browser) {
         if (driver == null) {
             try {
-                switch (driverType) {
+                switch (browser) {
                     case CHROME:
-                        driver = DriverType.CHROME.getDriverWithOptions(new URL(HUB_URL), capabilities);
+                        driver = CHROME.getDriver(HUB_URL);
                         break;
                     case FIREFOX:
-                        driver = DriverType.FIREFOX.getDriverWithOptions(new URL(HUB_URL), capabilities);
+                        driver = FIREFOX.getDriver(HUB_URL);
                         break;
                     case EDGE:
-                        driver = DriverType.EDGE.getDriverWithOptions(new URL(HUB_URL), capabilities);
+                        driver = EDGE.getDriver(HUB_URL);
                     default:
-                        throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", driverType.toString()));
+                        throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", browser.toString()));
                 }
-            } catch (MalformedURLException e) {
-                log.error(String.format("Malformed URL has occurred: \n %s", ExceptionUtils.getStackTrace(e)));
+            } catch (Exception e) {
+                logger.error(String.format("An unexpected error has occurred: \n %s", ExceptionUtils.getMessage(e)));
             }
         }
 
-        log.info(String.format("%s driver initialized", driverType.toString().toUpperCase()));
+        logger.info(String.format("Browser : %s", driver.getCapabilities().getBrowserName()));
+        logger.info(String.format("Version : %s", driver.getCapabilities().getBrowserVersion()));
+
         return driver;
     }
 

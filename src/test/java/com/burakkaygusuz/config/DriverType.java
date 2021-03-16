@@ -8,89 +8,98 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public enum DriverType implements DriverOptions {
+public enum DriverType {
 
     CHROME {
         @Override
-        public RemoteWebDriver getDriverWithOptions(URL url, DesiredCapabilities capabilities) {
-            System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+        public RemoteWebDriver getDriver(String url) throws MalformedURLException {
+            return new RemoteWebDriver(new URL(url), CHROME.getOptions());
+        }
+
+        @Override
+        public ChromeOptions getOptions() {
             Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
 
             Map<String, Object> prefs = new HashMap<>();
             prefs.put("profile.default_content_setting_values.notifications", 1);
 
-            final ChromeOptions options = new ChromeOptions();
+            final ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setCapability(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+            chromeOptions.setCapability(ChromeDriverService.CHROME_DRIVER_VERBOSE_LOG_PROPERTY, "true");
+            chromeOptions.setAcceptInsecureCerts(true);
+            chromeOptions.setHeadless(true);
+            chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+            chromeOptions.addArguments("enable-automation");
+            chromeOptions.addArguments("disable-translate");
+            chromeOptions.addArguments("--disable-gpu");
+            chromeOptions.addArguments("--start-maximized");
+            chromeOptions.setExperimentalOption("prefs", prefs);
 
-            options.addArguments("enable-automation");
-            options.addArguments("--start-maximized");
-            options.addArguments("--window-size=1920,1080");
-            options.addArguments("--disable-gpu");
-            options.addArguments("disable-translate");
-            options.setHeadless(true);
-            options.setAcceptInsecureCerts(true);
-            options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-            options.setExperimentalOption("prefs", prefs);
-
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-
-            return new RemoteWebDriver(url, capabilities);
+            return chromeOptions;
         }
     },
 
     FIREFOX {
         @Override
-        public RemoteWebDriver getDriverWithOptions(URL url, DesiredCapabilities capabilities) {
+        public RemoteWebDriver getDriver(String url) throws MalformedURLException {
+            return new RemoteWebDriver(new URL(url), FIREFOX.getOptions());
+        }
+
+        @Override
+        public FirefoxOptions getOptions() {
             Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
 
-            final FirefoxOptions options = new FirefoxOptions();
-            final FirefoxProfile profile = new FirefoxProfile();
+            final FirefoxOptions firefoxOptions = new FirefoxOptions();
+            final FirefoxProfile firefoxProfile = new FirefoxProfile();
 
-            profile.setPreference(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, true);
+            firefoxProfile.setPreference(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, true);
 
-            options.setAcceptInsecureCerts(true);
-            options.addPreference("dom.webnotifications.enabled", false);
-            options.addPreference("gfx.direct2d.disabled", true);
-            options.addPreference("layers.acceleration.disabled", true);
-            options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-            options.setHeadless(true);
-            options.setProfile(profile);
+            firefoxOptions.setAcceptInsecureCerts(true);
+            firefoxOptions.addPreference("dom.webnotifications.enabled", false);
+            firefoxOptions.addPreference("gfx.direct2d.disabled", true);
+            firefoxOptions.addPreference("layers.acceleration.disabled", true);
+            firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+            firefoxOptions.setHeadless(true);
+            firefoxOptions.setProfile(firefoxProfile);
 
-            capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
-
-            return new RemoteWebDriver(url, capabilities);
+            return firefoxOptions;
         }
     },
 
     EDGE {
         @Override
-        public RemoteWebDriver getDriverWithOptions(URL url, DesiredCapabilities capabilities) {
-            System.setProperty(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-            Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
+        public RemoteWebDriver getDriver(String url) throws MalformedURLException {
+            return new RemoteWebDriver(new URL(url), EDGE.getOptions());
+        }
 
-            final EdgeOptions options = new EdgeOptions();
+        @Override
+        public EdgeOptions getOptions() {
+            final EdgeOptions edgeOptions = new EdgeOptions();
 
-            options.setAcceptInsecureCerts(true);
-            options.addArguments("disable-gpu");
-            options.setHeadless(true);
-            options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+            edgeOptions.setCapability(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+            edgeOptions.setCapability(EdgeDriverService.EDGE_DRIVER_VERBOSE_LOG_PROPERTY, "true");
+            edgeOptions.addArguments("--start-maximized");
+            edgeOptions.addArguments("disable-gpu");
+            edgeOptions.setHeadless(true);
+            edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+            edgeOptions.setAcceptInsecureCerts(true);
 
-            capabilities.setCapability(EdgeOptions.CAPABILITY, options);
-
-            return new RemoteWebDriver(url, capabilities);
+            return edgeOptions;
         }
     };
 
-    @Override
-    public String toString() {
-        return super.toString().toLowerCase();
-    }
+    public abstract RemoteWebDriver getDriver(String url) throws MalformedURLException;
+
+    public abstract AbstractDriverOptions<?> getOptions();
+
 }

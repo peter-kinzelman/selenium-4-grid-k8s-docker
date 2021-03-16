@@ -1,13 +1,12 @@
 package com.burakkaygusuz;
 
 import com.burakkaygusuz.config.DriverFactory;
-import com.burakkaygusuz.config.DriverType;
+import com.burakkaygusuz.enums.Browsers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,10 +20,10 @@ public class BaseTest {
     public static final List<DriverFactory> webDriverThreadPool = Collections.synchronizedList(new ArrayList<>());
     public static ThreadLocal<DriverFactory> driverFactoryThread;
 
-    private static final Logger log = LogManager.getLogger(BaseTest.class.getName());
+    private static final Logger logger = LogManager.getLogger(BaseTest.class.getName());
 
-    public RemoteWebDriver driver;
-    public WebDriverWait wait;
+    protected RemoteWebDriver driver;
+    protected WebDriverWait wait;
 
     @BeforeAll
     public static void setUp() {
@@ -37,16 +36,16 @@ public class BaseTest {
 
     @BeforeEach
     public void beforeEach(TestInfo testInfo) {
-        log.info(String.format("Test: %s started", testInfo.getDisplayName()));
+        logger.info(String.format("Test: %s started", testInfo.getDisplayName()));
     }
 
     @AfterEach
     public void afterEach(TestInfo testInfo) {
-        log.info(String.format("Test: %s finished", testInfo.getDisplayName()));
+        logger.info(String.format("Test: %s finished", testInfo.getDisplayName()));
     }
 
-    public static RemoteWebDriver getWebDriver(DriverType driverType, DesiredCapabilities capabilities) {
-        return driverFactoryThread.get().getWebDriver(driverType, capabilities);
+    public static RemoteWebDriver getWebDriver(Browsers browser) {
+        return driverFactoryThread.get().getWebDriver(browser);
     }
 
     public static WebDriverWait getDriverWait(RemoteWebDriver driver) {

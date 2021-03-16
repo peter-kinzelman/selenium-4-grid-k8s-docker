@@ -1,13 +1,12 @@
 package com.burakkaygusuz.tests;
 
 import com.burakkaygusuz.BaseTest;
-import com.burakkaygusuz.config.DriverType;
+import com.burakkaygusuz.enums.Browsers;
 import com.burakkaygusuz.pages.HomePage;
 import com.burakkaygusuz.pages.SeleniumPage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.burakkaygusuz.pages.HomePage.getHomePage;
@@ -18,11 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SeleniumPageTests extends BaseTest {
 
     @ParameterizedTest(name = "#{index} - Run with => {0}")
-    @EnumSource(value = DriverType.class, names = {"CHROME", "FIREFOX", "EDGE"})
-    public void getSeleniumWikiPage(DriverType driverType) {
+    @EnumSource(value = Browsers.class, names = {"CHROME", "FIREFOX", "EDGE"})
+    public void getSeleniumWikiPage(Browsers browser) {
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        driver = getWebDriver(driverType, capabilities);
+        driver = getWebDriver(browser);
         wait = getDriverWait(driver);
 
         final HomePage homePage = getHomePage(driver);
