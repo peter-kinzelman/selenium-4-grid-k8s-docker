@@ -5,6 +5,8 @@ import com.burakkaygusuz.enums.Browsers;
 import com.burakkaygusuz.pages.HomePage;
 import com.burakkaygusuz.pages.SeleniumPage;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +15,7 @@ import static com.burakkaygusuz.pages.HomePage.getHomePage;
 import static com.burakkaygusuz.pages.SeleniumPage.getSeleniumPage;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Execution(ExecutionMode.CONCURRENT)
 @DisplayName("Selenium Wikipedia Page Tests")
 public class SeleniumPageTests extends BaseTest {
 
