@@ -1,7 +1,6 @@
-# To execute this yml file use this command in your local kubernetes environment `kubectl apply -f deploy.yml`
-#***************************************
-#SELENIUM EVENT BUS
-#***************************************
+# To execute this yml file, use this command in your local kubernetes environment `kubectl apply -f deploy.yml`
+
+# Event Bus
 apiVersion: v1
 kind: Service
 metadata:
@@ -49,7 +48,7 @@ spec:
     spec:
       containers:
         - name: selenium-event-bus
-          image: selenium/event-bus:4.0.0-beta-1-20210215
+          image: selenium/event-bus:4.0.0-beta-3-prerelease-20210402
           ports:
             - containerPort: 4442
               protocol: TCP
@@ -58,9 +57,8 @@ spec:
             - containerPort: 5557
               protocol: TCP
 ---
-#***************************************
-#SELENIUM SESSIONS MAP
-#***************************************
+
+# Sessions Map
 apiVersion: v1
 kind: Service
 metadata:
@@ -100,7 +98,7 @@ spec:
     spec:
       containers:
         - name: selenium-sessions
-          image: selenium/sessions:4.0.0-beta-1-20210215
+          image: selenium/sessions:4.0.0-beta-3-prerelease-20210402
           env:
             - name: SE_EVENT_BUS_HOST
               value: "selenium-event-bus"
@@ -112,9 +110,8 @@ spec:
             - containerPort: 5556
               protocol: TCP
 ---
-#***************************************
-#SELENIUM SESSION QUEUER
-#***************************************
+
+#Session Queuer
 apiVersion: v1
 kind: Service
 metadata:
@@ -153,7 +150,7 @@ spec:
     spec:
       containers:
         - name: selenium-session-queuer
-          image: selenium/session-queuer:4.0.0-beta-1-20210215
+          image: selenium/session-queuer:4.0.0-beta-3-prerelease-20210402
           env:
             - name: SE_EVENT_BUS_HOST
               value: "selenium-event-bus"
@@ -165,9 +162,8 @@ spec:
             - containerPort: 5556
               protocol: TCP
 ---
-#***************************************
-#SELENIUM DISTRIBUTOR
-#***************************************
+
+# Distributor
 apiVersion: v1
 kind: Service
 metadata:
@@ -207,7 +203,7 @@ spec:
     spec:
       containers:
         - name: selenium-distributor
-          image: selenium/distributor:4.0.0-beta-1-20210215
+          image: selenium/distributor:4.0.0-beta-3-prerelease-20210402
           env:
             - name: SE_EVENT_BUS_HOST
               value: "selenium-event-bus"
@@ -227,9 +223,7 @@ spec:
             - containerPort: 5553
               protocol: TCP
 ---
-#***************************************
-#SELENIUM ROUTER
-#***************************************
+# Router
 apiVersion: v1
 kind: Service
 metadata:
@@ -269,7 +263,7 @@ spec:
     spec:
       containers:
         - name: selenium-router
-          image: selenium/router:4.0.0-beta-1-20210215
+          image: selenium/router:4.0.0-beta-3-prerelease-20210402
           env:
             - name: SE_DISTRIBUTOR_HOST
               value: "selenium-distributor"
@@ -287,9 +281,7 @@ spec:
             - containerPort: 4444
               protocol: TCP
 ---
-#***************************************
-#SELENIUM CHROME NODE
-#***************************************
+# Chrome Node
 apiVersion: v1
 kind: Service
 metadata:
@@ -329,7 +321,7 @@ spec:
     spec:
       containers:
         - name: selenium-chrome-node
-          image: selenium/node-chrome:4.0.0-beta-1-20210215
+          image: selenium/node-chrome:4.0.0-beta-3-prerelease-20210402
           env:
             - name: SE_EVENT_BUS_HOST
               value: "selenium-event-bus"
@@ -354,9 +346,7 @@ spec:
         - name: dshm
           emptyDir: { "medium": "Memory" }
 ---
-#***************************************
-#SELENIUM EDGE NODE
-#***************************************
+# Edge Node
 apiVersion: v1
 kind: Service
 metadata:
@@ -396,7 +386,7 @@ spec:
     spec:
       containers:
         - name: selenium-edge-node
-          image: selenium/node-edge:4.0.0-beta-1-20210215
+          image: selenium/node-edge:4.0.0-beta-3-prerelease-20210402
           env:
             - name: SE_EVENT_BUS_HOST
               value: "selenium-event-bus"
@@ -421,9 +411,7 @@ spec:
         - name: dshm
           emptyDir: { "medium": "Memory" }
 ---
-#***************************************
-#SELENIUM FIREFOX NODE
-#***************************************
+# Firefox Node
 apiVersion: v1
 kind: Service
 metadata:
@@ -463,7 +451,7 @@ spec:
     spec:
       containers:
         - name: selenium-ff-node
-          image: selenium/node-firefox:4.0.0-beta-1-20210215
+          image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210402
           env:
             - name: SE_EVENT_BUS_HOST
               value: "selenium-event-bus"
