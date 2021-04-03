@@ -5,11 +5,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.Duration;
 import java.util.Scanner;
 
 import static com.burakkaygusuz.config.DriverType.*;
@@ -17,12 +15,11 @@ import static com.burakkaygusuz.config.DriverType.*;
 public class DriverFactory {
 
     private static final Logger logger = LogManager.getLogger(DriverFactory.class.getName());
-    protected static WebDriverWait wait;
-    protected RemoteWebDriver driver;
+    private RemoteWebDriver driver;
 
-    private static final String HUB_URL = getHubUrl();
+    protected static final String HUB_URL = getHubUrl();
 
-    public RemoteWebDriver getWebDriver(Browsers browser) {
+    protected RemoteWebDriver getDriver(Browsers browser) {
         if (driver == null) {
             try {
                 switch (browser) {
@@ -48,13 +45,7 @@ public class DriverFactory {
         return driver;
     }
 
-    public WebDriverWait getWebDriverWait(RemoteWebDriver driver, int seconds, int milliSeconds) {
-        if (wait == null)
-            wait = new WebDriverWait(driver, Duration.ofSeconds(seconds), Duration.ofMillis(milliSeconds));
-        return wait;
-    }
-
-    public void quitWebDriver() {
+    protected void quitWebDriver() {
         if (driver != null) {
             driver.quit();
             driver = null;

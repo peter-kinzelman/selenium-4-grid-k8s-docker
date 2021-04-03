@@ -1,33 +1,35 @@
-package com.burakkaygusuz;
+package com.burakkaygusuz.config;
 
-import com.burakkaygusuz.config.DriverFactory;
 import com.burakkaygusuz.enums.Browsers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DriverBase {
 
-    public static final List<DriverFactory> webDriverThreadPool = Collections.synchronizedList(new ArrayList<>());
-    public static ThreadLocal<DriverFactory> driverFactoryThread;
-
     private static final Logger logger = LogManager.getLogger(DriverBase.class.getName());
-
-    protected RemoteWebDriver driver;
-    protected WebDriverWait wait;
+    private static final List<DriverFactory> threadPool = Collections.synchronizedList(new ArrayList<>());
+    private static ThreadLocal<DriverFactory> driverThread;
 
     @BeforeAll
-    public static void setUp() {
-        driverFactoryThread = ThreadLocal.withInitial(() -> {
-            DriverFactory driverFactory = new DriverFactory();
-            webDriverThreadPool.add(driverFactory);
-            return driverFactory;
+    public void instantiateDriverObject() {
+
+        logger.info(String.format("Operating System : %s", System.getProperty("os.name").toUpperCase()));
+        logger.info(String.format("Version          : %s", System.getProperty("os.version")));
+        logger.info(String.format("Arch             : %s", System.getProperty("os.arch")));
+        logger.info(String.format("Grid URL         : %s", DriverFactory.HUB_URL));
+        logger.info(String.format("Tests running on %d cores...)", Runtime.getRuntime().availableProcessors()));
+
+        driverThread = ThreadLocal.withInitial(() -> {
+            DriverFactory factory = new DriverFactory();
+            threadPool.add(factory);
+            return factory;
         });
     }
 
@@ -41,18 +43,13 @@ public class DriverBase {
         logger.info(String.format("Test: %s finished", testInfo.getDisplayName()));
     }
 
-    public static RemoteWebDriver getWebDriver(Browsers browser) {
-        return driverFactoryThread.get().getWebDriver(browser);
-    }
-
-    public static WebDriverWait getDriverWait(RemoteWebDriver driver) {
-        return driverFactoryThread.get().getWebDriverWait(driver, 10, 0);
-    }
-
     @AfterAll
-    public static void tearDown() {
-        for (DriverFactory driverFactory : webDriverThreadPool) {
-            driverFactory.quitWebDriver();
-        }
+    public void closeDriverObject() {
+        threadPool.forEach(DriverFactory::quitWebDriver);
+        driverThread.remove();
+    }
+
+    public static RemoteWebDriver getDriver(Browsers browser) {
+        return driverThread.get().getDriver(browser);
     }
 }
