@@ -54,12 +54,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
-    systemProperties["junit.jupiter.execution.parallel.enabled"] = true
-    systemProperties["junit.jupiter.execution.parallel.mode.default"] = "concurrent"
-    systemProperties["junit.jupiter.execution.parallel.mode.classes.default"] = "same_thread"
-
-    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    systemProperty "junit.jupiter.execution.parallel.enabled", "true"
+    systemProperty "junit.jupiter.execution.parallel.config.strategy", "dynamic"
 
     afterSuite { desc, result ->
         if (!desc.parent)
