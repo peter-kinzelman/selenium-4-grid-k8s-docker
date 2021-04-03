@@ -40,6 +40,7 @@ public class SeleniumPageTests extends BaseTest {
         assertAll("Selenium wiki page should open as successfully",
                 () -> assertEquals("Selenium (software) - Wikipedia", driver.getTitle()),
                 () -> assertTrue(wikiPage.getDefinitionText().startsWith("This article is about the software testing framework")));
+        Assertions.assertThat(wikiPage.getShortDescription())
     @Test
     @DisplayName("Verify The Github Url Is Correct")
     public void verifyTheGithubPageUrlIsCorrect() {

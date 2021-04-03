@@ -21,7 +21,7 @@ public class SeleniumPage {
         return new SeleniumPage(driver);
     }
 
-    public String getDefinitionText() {
+    public String getShortDescription() {
         return definition.getText();
     }
 
