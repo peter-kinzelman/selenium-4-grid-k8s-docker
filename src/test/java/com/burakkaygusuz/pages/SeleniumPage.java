@@ -10,6 +10,9 @@ public class SeleniumPage {
     @FindBy(xpath = "//div[@class='hatnote navigation-not-searchable']")
     private WebElement definition;
 
+    @FindBy(xpath = "//div[@class='plainlist']//ul//li//span[@class='url']")
+    private WebElement gitHubPageUrl;
+
     private SeleniumPage(RemoteWebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -20,5 +23,9 @@ public class SeleniumPage {
 
     public String getDefinitionText() {
         return definition.getText();
+    }
+
+    public String getGitHubPageUrl() {
+        return gitHubPageUrl.getText();
     }
 }

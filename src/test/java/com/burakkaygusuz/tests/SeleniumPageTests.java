@@ -37,5 +37,17 @@ public class SeleniumPageTests extends BaseTest {
         assertAll("Selenium wiki page should open as successfully",
                 () -> assertEquals("Selenium (software) - Wikipedia", driver.getTitle()),
                 () -> assertTrue(wikiPage.getDefinitionText().startsWith("This article is about the software testing framework")));
+    @Test
+    @DisplayName("Verify The Github Url Is Correct")
+    public void verifyTheGithubPageUrlIsCorrect() {
+
+        RemoteWebDriver driver = DriverBase.getDriver(Browsers.EDGE);
+        driver.navigate().to("https://en.wikipedia.org/wiki/Selenium_(software)");
+
+        final SeleniumPage wikiPage = getSeleniumPage(driver);
+
+        Assertions.assertThat(wikiPage.getGitHubPageUrl())
+                .withFailMessage(String.format("Expected Github URL is 'github.com/SeleniumHQ/' but was '%s'", wikiPage.getGitHubPageUrl()))
+                .isEqualTo("github.com/SeleniumHQ/");
     }
 }
