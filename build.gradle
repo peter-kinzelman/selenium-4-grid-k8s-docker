@@ -61,8 +61,8 @@ test {
         if (!desc.parent)
             println("${result.resultType} " +
                     "(${result.testCount} tests, " +
-                    "${result.successfulTestCount} successes, " +
-                    "${result.failedTestCount} failures, " +
+                    "${result.successfulTestCount} passed, " +
+                    "${result.failedTestCount} failed, " +
                     "${result.skippedTestCount} skipped)")
     }
 }
@@ -74,7 +74,7 @@ tasks.withType(Test) {
             TestLogEvent.SKIPPED,
             TestLogEvent.STANDARD_ERROR,
             TestLogEvent.STANDARD_OUT)
-    testLogging.exceptionFormat TestExceptionFormat.FULL
+    testLogging.exceptionFormat TestExceptionFormat.SHORT
     testLogging.showCauses true
     testLogging.showExceptions true
     testLogging.showStackTraces true
