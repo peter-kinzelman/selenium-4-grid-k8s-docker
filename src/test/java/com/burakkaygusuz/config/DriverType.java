@@ -34,6 +34,7 @@ public enum DriverType {
             prefs.put("profile.default_content_setting_values.notifications", 1);
 
             final ChromeOptions chromeOptions = new ChromeOptions();
+
             chromeOptions.setCapability(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
             chromeOptions.setCapability(ChromeDriverService.CHROME_DRIVER_VERBOSE_LOG_PROPERTY, "true");
             chromeOptions.setAcceptInsecureCerts(true);
@@ -63,7 +64,6 @@ public enum DriverType {
             final FirefoxProfile firefoxProfile = new FirefoxProfile();
 
             firefoxProfile.setPreference(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, true);
-
             firefoxOptions.setAcceptInsecureCerts(true);
             firefoxOptions.addPreference("dom.webnotifications.enabled", false);
             firefoxOptions.addPreference("gfx.direct2d.disabled", true);
@@ -84,6 +84,7 @@ public enum DriverType {
 
         @Override
         public EdgeOptions getOptions() {
+
             final EdgeOptions edgeOptions = new EdgeOptions();
 
             edgeOptions.setCapability(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
@@ -98,8 +99,7 @@ public enum DriverType {
         }
     };
 
-    public abstract RemoteWebDriver getDriver(String url) throws MalformedURLException;
+    protected abstract RemoteWebDriver getDriver(String url) throws MalformedURLException;
 
-    public abstract AbstractDriverOptions<?> getOptions();
-
+    protected abstract AbstractDriverOptions<?> getOptions();
 }
