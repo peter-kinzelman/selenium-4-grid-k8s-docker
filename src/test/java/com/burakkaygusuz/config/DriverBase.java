@@ -15,12 +15,12 @@ import java.util.Collections;
 import java.util.List;
 
 @Execution(ExecutionMode.CONCURRENT)
-public class BaseTest {
+public class DriverBase {
 
     public static final List<DriverFactory> webDriverThreadPool = Collections.synchronizedList(new ArrayList<>());
     public static ThreadLocal<DriverFactory> driverFactoryThread;
 
-    private static final Logger logger = LogManager.getLogger(BaseTest.class.getName());
+    private static final Logger logger = LogManager.getLogger(DriverBase.class.getName());
 
     protected RemoteWebDriver driver;
     protected WebDriverWait wait;
