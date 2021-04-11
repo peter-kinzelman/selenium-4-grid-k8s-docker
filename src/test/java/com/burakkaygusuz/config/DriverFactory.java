@@ -32,7 +32,7 @@ public class DriverFactory {
                     case EDGE:
                         driver = EDGE.getDriver(HUB_URL);
                     default:
-                        throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", browser.toString()));
+                        throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", browser));
                 }
             } catch (Exception e) {
                 logger.error(String.format("An unexpected error has occurred: \n %s", ExceptionUtils.getMessage(e)));
