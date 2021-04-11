@@ -24,13 +24,13 @@ public class DriverFactory {
             try {
                 switch (browser) {
                     case CHROME:
-                        driver = CHROME.getDriver(HUB_URL);
+                        driver = CHROME.getDriver();
                         break;
                     case FIREFOX:
-                        driver = FIREFOX.getDriver(HUB_URL);
+                        driver = FIREFOX.getDriver();
                         break;
                     case EDGE:
-                        driver = EDGE.getDriver(HUB_URL);
+                        driver = EDGE.getDriver();
                     default:
                         throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", browser));
                 }

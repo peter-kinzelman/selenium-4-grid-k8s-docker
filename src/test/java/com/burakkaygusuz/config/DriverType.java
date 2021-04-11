@@ -18,12 +18,14 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.burakkaygusuz.config.DriverFactory.*;
+
 public enum DriverType {
 
     CHROME {
         @Override
-        public RemoteWebDriver getDriver(String url) throws MalformedURLException {
-            return new RemoteWebDriver(new URL(url), CHROME.getOptions());
+        public RemoteWebDriver getDriver() throws MalformedURLException {
+            return new RemoteWebDriver(new URL(HUB_URL), CHROME.getOptions());
         }
 
         @Override
@@ -52,8 +54,8 @@ public enum DriverType {
 
     FIREFOX {
         @Override
-        public RemoteWebDriver getDriver(String url) throws MalformedURLException {
-            return new RemoteWebDriver(new URL(url), FIREFOX.getOptions());
+        public RemoteWebDriver getDriver() throws MalformedURLException {
+            return new RemoteWebDriver(new URL(HUB_URL), FIREFOX.getOptions());
         }
 
         @Override
@@ -78,8 +80,8 @@ public enum DriverType {
 
     EDGE {
         @Override
-        public RemoteWebDriver getDriver(String url) throws MalformedURLException {
-            return new RemoteWebDriver(new URL(url), EDGE.getOptions());
+        public RemoteWebDriver getDriver() throws MalformedURLException {
+            return new RemoteWebDriver(new URL(HUB_URL), EDGE.getOptions());
         }
 
         @Override
@@ -99,7 +101,7 @@ public enum DriverType {
         }
     };
 
-    protected abstract RemoteWebDriver getDriver(String url) throws MalformedURLException;
+    protected abstract RemoteWebDriver getDriver() throws MalformedURLException;
 
     protected abstract AbstractDriverOptions<?> getOptions();
 }
