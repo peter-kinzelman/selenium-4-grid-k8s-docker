@@ -55,10 +55,10 @@ public class DriverFactory {
     private static String getHubUrl() {
         String hubUrl = null;
         try (InputStream inputStream = Runtime.getRuntime().exec("minikube service selenium-router-deployment --url").getInputStream();
-             Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
-            hubUrl = s.hasNext() ? s.next() : null;
+             Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
+            hubUrl = scanner.hasNext() ? scanner.next() : null;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("An error occurred while getting the URL value: \n %s", e.getMessage());
         }
         return hubUrl;
     }
