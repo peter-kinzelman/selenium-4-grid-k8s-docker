@@ -13,6 +13,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -84,7 +85,7 @@ public enum DriverType {
 
         @Override
         public EdgeOptions getOptions() {
-
+            Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
             final EdgeOptions edgeOptions = new EdgeOptions();
 
             edgeOptions.setCapability(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
