@@ -42,10 +42,8 @@ public enum DriverType {
             chromeOptions.setAcceptInsecureCerts(true);
             chromeOptions.setHeadless(true);
             chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-            chromeOptions.addArguments("enable-automation");
-            chromeOptions.addArguments("disable-translate");
-            chromeOptions.addArguments("--disable-gpu");
-            chromeOptions.addArguments("--start-maximized");
+            chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("disable-popup-blocking", "enable-automation"));
+            chromeOptions.addArguments("--disable-gpu", "start-maximized");
             chromeOptions.setExperimentalOption("prefs", prefs);
 
             return chromeOptions;
@@ -69,7 +67,7 @@ public enum DriverType {
             firefoxOptions.setAcceptInsecureCerts(true);
             firefoxOptions.addPreference("dom.webnotifications.enabled", false);
             firefoxOptions.addPreference("gfx.direct2d.disabled", true);
-            firefoxOptions.addPreference("layers.acceleration.disabled", true);
+            firefoxOptions.addPreference("layers.acceleration.force-enabled", true);
             firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             firefoxOptions.setHeadless(true);
             firefoxOptions.setProfile(firefoxProfile);
@@ -91,8 +89,7 @@ public enum DriverType {
 
             edgeOptions.setCapability(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
             edgeOptions.setCapability(EdgeDriverService.EDGE_DRIVER_VERBOSE_LOG_PROPERTY, "true");
-            edgeOptions.addArguments("--start-maximized");
-            edgeOptions.addArguments("disable-gpu");
+            edgeOptions.addArguments("start-maximized", "--disable-gpu");
             edgeOptions.setHeadless(true);
             edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             edgeOptions.setAcceptInsecureCerts(true);
