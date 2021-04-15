@@ -33,7 +33,7 @@ public enum DriverType {
             Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
 
             Map<String, Object> prefs = new HashMap<>();
-            prefs.put("profile.default_content_setting_values.notifications", 1);
+            prefs.put("profile.default_content_setting_values.notifications", 2);
 
             final ChromeOptions chromeOptions = new ChromeOptions();
 
