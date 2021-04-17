@@ -59,7 +59,7 @@ public class DriverFactory {
              Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
             hubUrl = scanner.hasNext() ? scanner.next() : null;
         } catch (IOException e) {
-            LOGGER.error("An error occurred while getting the URL value: \n %s", e.getMessage());
+            LOGGER.error(String.format("An error occurred while getting the URL value: \n %s", ExceptionUtils.getMessage(e)));
         }
         return hubUrl;
     }
