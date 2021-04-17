@@ -35,6 +35,8 @@ public enum DriverType {
 
             Map<String, Object> prefs = new HashMap<>();
             prefs.put("profile.default_content_setting_values.notifications", 2);
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
 
             final ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -44,6 +46,7 @@ public enum DriverType {
             chromeOptions.setHeadless(true);
             chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("disable-popup-blocking", "enable-automation"));
+            chromeOptions.setExperimentalOption("useAutomationExtension", false);
             chromeOptions.addArguments("--disable-gpu", "start-maximized");
             chromeOptions.setExperimentalOption("prefs", prefs);
 
