@@ -13,18 +13,18 @@ import java.util.List;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DriverBase {
 
-    private static final Logger logger = LogManager.getLogger(DriverBase.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(DriverBase.class.getName());
     private static final List<DriverFactory> threadPool = Collections.synchronizedList(new ArrayList<>());
     private static ThreadLocal<DriverFactory> driverThread;
 
     @BeforeAll
     public void instantiateDriverObject() {
 
-        logger.info(String.format("Operating System : %s", System.getProperty("os.name").toUpperCase()));
-        logger.info(String.format("Version          : %s", System.getProperty("os.version")));
-        logger.info(String.format("Arch             : %s", System.getProperty("os.arch")));
-        logger.info(String.format("Grid URL         : %s", DriverFactory.HUB_URL));
-        logger.info(String.format("Tests running on %d cores...)", Runtime.getRuntime().availableProcessors()));
+        LOGGER.info(String.format("Operating System : %s", System.getProperty("os.name").toUpperCase()));
+        LOGGER.info(String.format("Version          : %s", System.getProperty("os.version")));
+        LOGGER.info(String.format("Arch             : %s", System.getProperty("os.arch")));
+        LOGGER.info(String.format("Grid URL         : %s", DriverFactory.HUB_URL));
+        LOGGER.info(String.format("Tests running on %d cores...)", Runtime.getRuntime().availableProcessors()));
 
         driverThread = ThreadLocal.withInitial(() -> {
             DriverFactory factory = new DriverFactory();
@@ -35,12 +35,12 @@ public class DriverBase {
 
     @BeforeEach
     public void beforeEach(TestInfo testInfo) {
-        logger.info(String.format("Test: %s started", testInfo.getDisplayName()));
+        LOGGER.info(String.format("Test: %s started", testInfo.getDisplayName()));
     }
 
     @AfterEach
     public void afterEach(TestInfo testInfo) {
-        logger.info(String.format("Test: %s finished", testInfo.getDisplayName()));
+        LOGGER.info(String.format("Test: %s finished", testInfo.getDisplayName()));
     }
 
     @AfterAll

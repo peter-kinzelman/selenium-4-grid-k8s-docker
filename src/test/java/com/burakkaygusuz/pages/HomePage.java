@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class HomePage {
 
-    private static final Logger logger = LogManager.getLogger(HomePage.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(HomePage.class.getName());
 
     @FindBy(id = "searchInput")
     private WebElement searchInput;
@@ -30,14 +30,14 @@ public class HomePage {
     private HomePage selectLanguage() {
         Select dropdownList = new Select(selectLanguage);
         dropdownList.selectByVisibleText("English");
-        logger.info(String.format("The English language was selected"));
+        LOGGER.info(String.format("The English language was selected"));
         return this;
     }
 
     private HomePage searchTheItem() {
         searchInput.clear();
         searchInput.sendKeys("Selenium (software)" + Keys.ENTER);
-        logger.info(String.format("'Selenium (software)' was written in %s input", searchInput.getAttribute("name")));
+        LOGGER.info(String.format("'Selenium (software)' was written in %s input", searchInput.getAttribute("name")));
         return this;
     }
 

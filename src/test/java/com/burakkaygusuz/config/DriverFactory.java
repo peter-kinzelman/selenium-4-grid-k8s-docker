@@ -14,7 +14,7 @@ import static com.burakkaygusuz.config.DriverType.*;
 
 public class DriverFactory {
 
-    private static final Logger logger = LogManager.getLogger(DriverFactory.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(DriverFactory.class.getName());
     private RemoteWebDriver driver;
 
     protected static final String HUB_URL = getHubUrl();
@@ -35,12 +35,12 @@ public class DriverFactory {
                         throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", browser));
                 }
             } catch (Exception e) {
-                logger.error(String.format("An unexpected error has occurred: \n %s", ExceptionUtils.getMessage(e)));
+                LOGGER.error(String.format("An unexpected error has occurred: \n %s", ExceptionUtils.getMessage(e)));
             }
         }
 
-        logger.info(String.format("Browser : %s", driver.getCapabilities().getBrowserName()));
-        logger.info(String.format("Version : %s", driver.getCapabilities().getBrowserVersion()));
+        LOGGER.info(String.format("Browser : %s", driver.getCapabilities().getBrowserName()));
+        LOGGER.info(String.format("Version : %s", driver.getCapabilities().getBrowserVersion()));
 
         return driver;
     }
@@ -58,7 +58,7 @@ public class DriverFactory {
              Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
             hubUrl = scanner.hasNext() ? scanner.next() : null;
         } catch (IOException e) {
-            logger.error("An error occurred while getting the URL value: \n %s", e.getMessage());
+            LOGGER.error("An error occurred while getting the URL value: \n %s", e.getMessage());
         }
         return hubUrl;
     }
