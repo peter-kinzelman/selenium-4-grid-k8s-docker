@@ -1,6 +1,7 @@
 package com.burakkaygusuz.config;
 
 import com.burakkaygusuz.enums.Browsers;
+import com.burakkaygusuz.exceptions.UnSupportedBrowserException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +33,7 @@ public class DriverFactory {
                     case EDGE:
                         driver = EDGE.getDriver();
                     default:
-                        throw new IllegalStateException(String.format("An unexpected driver has been attempted to init: \n %s", browser));
+                        throw new UnSupportedBrowserException(String.format("An unexpected driver has been attempted to init: \n %s", browser));
                 }
             } catch (Exception e) {
                 LOGGER.error(String.format("An unexpected error has occurred: \n %s", ExceptionUtils.getMessage(e)));
