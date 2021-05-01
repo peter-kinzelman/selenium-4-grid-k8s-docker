@@ -46,7 +46,6 @@ public enum DriverType {
             chromeOptions.setHeadless(true);
             chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("disable-popup-blocking", "enable-automation"));
-            chromeOptions.setExperimentalOption("useAutomationExtension", false);
             chromeOptions.addArguments("--disable-gpu", "start-maximized");
             chromeOptions.setExperimentalOption("prefs", prefs);
 
