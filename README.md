@@ -1,5 +1,7 @@
 # Selenium 4 Grid & Kubernetes & Docker
 
+![Selenium Java](https://img.shields.io/maven-central/v/org.seleniumhq.selenium/selenium-java?color=43B02A&label=selenium&logo=selenium&style=for-the-badge)
+
 This project demonstrates how to execute the distributed tests parallel via deploying Selenium Grid 4 to a Kubernetes cluster.
 
 ## Requirements
