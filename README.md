@@ -1,7 +1,6 @@
-# Selenium 4 Grid & K8s & Docker
+# Selenium 4 Grid & Kubernetes & Docker
 
-This demo that created as a template, demonstrates how to do the settings of the Chrome ve Firefox web driver for
-distributed parallel testing with Selenium 4 Grid using Kubernetes and Docker.
+This project demonstrates how to execute the distributed tests parallel via deploying Selenium Grid 4 to a Kubernetes cluster.
 
 ## Requirements
 
