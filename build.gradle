@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
 
-    def selenium_version = '4.0.0-beta-3'
+    def selenium_version = '4.0.0-beta-4'
     def junit_jupiter_version = '5.8.0-M1'
     def junit_platform_version = '1.8.0-M1'
     def assertj_core_version = '3.19.0'
