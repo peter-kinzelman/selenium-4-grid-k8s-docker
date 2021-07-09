@@ -27,7 +27,7 @@ dependencies {
     def assertj_core_version = '3.20.2'
     def log4j_version = '2.14.1'
     def apache_commons_version = '3.12.0'
-    def fasterxml_jackson_version = '2.12.3'
+    def fasterxml_jackson_version = '2.12.4'
     def sl4j_version = '2.0.0-alpha1'
 
     testImplementation(
