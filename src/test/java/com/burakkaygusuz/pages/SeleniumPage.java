@@ -3,9 +3,8 @@ package com.burakkaygusuz.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class SeleniumPage {
+public class SeleniumPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='hatnote navigation-not-searchable']")
     private WebElement definition;
@@ -13,8 +12,8 @@ public class SeleniumPage {
     @FindBy(xpath = "//div[@class='plainlist']//ul//li//span[@class='url']")
     private WebElement gitHubPageUrl;
 
-    private SeleniumPage(RemoteWebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public SeleniumPage(RemoteWebDriver driver) {
+        super(driver);
     }
 
     public static SeleniumPage getSeleniumPage(RemoteWebDriver driver) {

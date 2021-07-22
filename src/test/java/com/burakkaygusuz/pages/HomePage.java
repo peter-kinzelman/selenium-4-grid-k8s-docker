@@ -6,10 +6,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class HomePage {
+public class HomePage extends BasePage {
 
     private static final Logger LOGGER = LogManager.getLogger(HomePage.class.getName());
 
@@ -19,8 +18,8 @@ public class HomePage {
     @FindBy(id = "searchLanguage")
     private WebElement selectLanguage;
 
-    private HomePage(RemoteWebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public HomePage(RemoteWebDriver driver) {
+        super(driver);
     }
 
     public static HomePage getHomePage(RemoteWebDriver driver) {
